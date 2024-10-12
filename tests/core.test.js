@@ -141,25 +141,25 @@ describe('group', () => {
 // Boundary Testing
 
     describe('isPriceInRange', () => {
-        it('should return false when the price is outside the range', () => {
-            expect(isPriceInRange(-10, 0, 100)).toBe(false)
-            expect(isPriceInRange(200, 0, 100)).toBe(false)
-        })
-        it('should return true when the price is equal to the min or to the max', () => {
-            expect(isPriceInRange(0, 0, 100)).toBe(true)
-            expect(isPriceInRange(100, 0, 100)).toBe(true)
-        })
-        it('should return true when the price is within the range', () => {
-            expect(isPriceInRange(50, 0, 100)).toBe(true)
-        })
+        it.each([
+            { scenario: 'price < min', price: -10, result: false },
+            { scenario: 'price = min', price: 0, result: true },
+            { scenario: 'price between min and max', price: 50, result: true },
+            { scenario: 'price = max', price: 100, result: true },
+            { scenario: 'price > max', price: 200, result: false },
+        ])('should return $result when $scenario', ({ price, result}) => [
+            expect(isPriceInRange(price, 0, 100)).toBe(result)
+        ])
     })
 
 // Exercise
 
     describe('isValidUsername', () => {
-        it('should return false when the username length is outside the range', () => {
-            expect(isValidUsername('A'.repeat(16))).toBe(false)
+        it('should return false when the username length is too short', () => {
             expect(isValidUsername('A'.repeat(4))).toBe(false)
+        })
+        it('should return false when the username length is too long', () => {
+            expect(isValidUsername('A'.repeat(16))).toBe(false)
         })
         it('should return true when the username length is equal to the min or to the max', () => {
             expect(isValidUsername('A'.repeat(15))).toBe(true)
