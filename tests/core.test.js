@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateDiscount, getCoupons, isPriceInRange, isValidUsername, validateUserInput } from '../src/core';
+import { calculateDiscount, canDrive, getCoupons, isPriceInRange, isValidUsername, validateUserInput } from '../src/core';
 import { it, expect, describe } from 'vitest'
 
 // Explanation
@@ -155,7 +155,7 @@ describe('group', () => {
     })
 
 // Exercise
-// Too short, too long, length exactly to min or max
+
     describe('isValidUsername', () => {
         it('should return false when the username length is outside the range', () => {
             expect(isValidUsername('A'.repeat(16))).toBe(false)
@@ -172,5 +172,33 @@ describe('group', () => {
             expect(isValidUsername(1)).toBe(false)
             expect(isValidUsername(null)).toBe(false)
             expect(isValidUsername(undefined)).toBe(false)
+        })
+    })
+
+    // Exercise 
+
+    describe('canDrive', () => {
+        it('should return error if is not a valid countryCode', () => {
+            expect(canDrive(18, 'ES')).toMatch(/invalid/i)
+        })
+
+        it('should return false if cannot drive in UK', () => {
+            expect(canDrive(16, 'UK')).toBe(false)
+        })
+        it('should return true if exactly can drive in UK', () => {
+            expect(canDrive(17, 'UK')).toBe(true)
+        })
+        it('should return true if can drive in UK', () => {
+            expect(canDrive(20, 'UK')).toBe(true)
+        })
+
+        it('should return true if cannot drive in US', () => {
+            expect(canDrive(15, 'US')).toBe(false)
+        })
+        it('should return true if exactly can drive in US', () => {
+            expect(canDrive(16, 'US')).toBe(true)
+        })
+        it('should return true if can drive in US', () => {
+            expect(canDrive(20, 'US')).toBe(true)
         })
     })
