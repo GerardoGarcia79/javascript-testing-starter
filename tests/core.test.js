@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateDiscount, getCoupons, isPriceInRange, validateUserInput } from '../src/core';
+import { calculateDiscount, getCoupons, isPriceInRange, isValidUsername, validateUserInput } from '../src/core';
 import { it, expect, describe } from 'vitest'
 
 // Explanation
@@ -154,3 +154,23 @@ describe('group', () => {
         })
     })
 
+// Exercise
+// Too short, too long, length exactly to min or max
+    describe('isValidUsername', () => {
+        it('should return false when the username length is outside the range', () => {
+            expect(isValidUsername('A'.repeat(16))).toBe(false)
+            expect(isValidUsername('A'.repeat(4))).toBe(false)
+        })
+        it('should return true when the username length is equal to the min or to the max', () => {
+            expect(isValidUsername('A'.repeat(15))).toBe(true)
+            expect(isValidUsername('A'.repeat(5))).toBe(true)
+        })
+        it('should return true when the username length within the range', () => {
+            expect(isValidUsername('A'.repeat(10))).toBe(true)
+        })
+        it('should return false for invalid input types', () => {
+            expect(isValidUsername(1)).toBe(false)
+            expect(isValidUsername(null)).toBe(false)
+            expect(isValidUsername(undefined)).toBe(false)
+        })
+    })
