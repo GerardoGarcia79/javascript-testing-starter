@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateDiscount, getCoupons, validateUserInput } from '../src/core';
+import { calculateDiscount, getCoupons, isPriceInRange, validateUserInput } from '../src/core';
 import { it, expect, describe } from 'vitest'
 
 // Explanation
@@ -83,6 +83,8 @@ describe('getCoupons', () => {
     })
 })
 
+
+
 // Positive and negative tests
 
 describe('calculateDiscount', () => {
@@ -103,6 +105,8 @@ describe('calculateDiscount', () => {
         expect(calculateDiscount(10, 'INVALID')).toBe(10)
     })
 })
+
+// Exercise
 
 describe('group', () => {
     it('should return successful if given valid input', () => {
@@ -131,3 +135,22 @@ describe('group', () => {
         expect(validateUserInput('', 0)).toMatch(/invalid age/i)
     })
 })
+
+
+
+// Boundary Testing
+
+    describe('isPriceInRange', () => {
+        it('should return false when the price is outside the range', () => {
+            expect(isPriceInRange(-10, 0, 100)).toBe(false)
+            expect(isPriceInRange(200, 0, 100)).toBe(false)
+        })
+        it('should return true when the price is equal to the min or to the max', () => {
+            expect(isPriceInRange(0, 0, 100)).toBe(true)
+            expect(isPriceInRange(100, 0, 100)).toBe(true)
+        })
+        it('should return true when the price is within the range', () => {
+            expect(isPriceInRange(50, 0, 100)).toBe(true)
+        })
+    })
+
