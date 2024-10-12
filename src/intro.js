@@ -18,3 +18,10 @@ export function calculateAverage(numbers) {
   const sum = numbers.reduce((accumulator, current) => accumulator + current, 0);
   return sum / numbers.length;
 }
+
+export function calculateFactorial(number) {
+  if(number < 0) return undefined
+  if(number === 0) return 1;
+
+  return number * calculateFactorial(number - 1)
+}
