@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { calculateDiscount, canDrive, getCoupons, isPriceInRange, isValidUsername, validateUserInput } from '../src/core';
+import { describe, it, expect, beforeEach, beforeAll, afterEach, afterAll } from 'vitest';
+import { calculateDiscount, canDrive, fetchData, getCoupons, isPriceInRange, isValidUsername, validateUserInput } from '../src/core';
 import { it, expect, describe } from 'vitest'
 
 // Explanation
@@ -192,5 +192,58 @@ describe('group', () => {
             { age: 18, country: 'UK', result: true },
         ])('should return $result for $age, $country', ({ age, country, result}) => {
             expect(canDrive(age, country)).toBe(result)
+        })
+    })
+
+    describe('fetchData', () => {
+        // async - await method
+        it('should return a promise that will resolve to an array of numbers', async () => {
+            // test reject
+            try {
+                const result = await fetchData();    
+            } catch (error) {
+                expect(error).toHaveProperty('reason') 
+                expect(error.reason).toMatch(/fail/i) 
+            }
+            // test success
+            // expect(Array.isArray(result)).toBe(true)
+            // expect(result.length).toBeGreaterThan(0);
+        })
+        // then - catch method
+        // it('should return a promise that will resolve to an array of numbers', async () => {            
+        //     fetchData().then((result) => {
+        //         expect(Array.isArray(result)).toBe(true)
+        //         expect(result.length).toBeGreaterThan(0);
+        //     })
+        //     .catch((error) => {
+        //         expect(error).toHaveProperty('reason') 
+        //         expect(error.reason).toMatch(/fail/i) 
+        //     })
+        // })
+    })
+
+
+    describe('test suite', () => {
+        beforeAll(() => {
+            console.log('beforeAll called');
+        })
+
+        beforeEach(() => {
+            console.log('beforeEach called');
+        })
+
+        afterEach(() => {
+            console.log('afterEach called');
+        })
+
+        afterAll(() => {
+            console.log('afterAll called');
+        })
+
+        it('test suite 1', () => {
+            
+        })
+        it('test suite 2', () => {
+            
         })
     })
