@@ -182,23 +182,15 @@ describe('group', () => {
             expect(canDrive(18, 'ES')).toMatch(/invalid/i)
         })
 
-        it('should return false if cannot drive in UK', () => {
-            expect(canDrive(16, 'UK')).toBe(false)
-        })
-        it('should return true if exactly can drive in UK', () => {
-            expect(canDrive(17, 'UK')).toBe(true)
-        })
-        it('should return true if can drive in UK', () => {
-            expect(canDrive(20, 'UK')).toBe(true)
-        })
-
-        it('should return true if cannot drive in US', () => {
-            expect(canDrive(15, 'US')).toBe(false)
-        })
-        it('should return true if exactly can drive in US', () => {
-            expect(canDrive(16, 'US')).toBe(true)
-        })
-        it('should return true if can drive in US', () => {
-            expect(canDrive(20, 'US')).toBe(true)
+        // Parameterized test
+        it.each([
+            { age: 15, country: 'US', result: false },
+            { age: 16, country: 'US', result: true },
+            { age: 17, country: 'US', result: true },
+            { age: 16, country: 'UK', result: false },
+            { age: 17, country: 'UK', result: true },
+            { age: 18, country: 'UK', result: true },
+        ])('should return $result for $age, $country', ({ age, country, result}) => {
+            expect(canDrive(age, country)).toBe(result)
         })
     })
