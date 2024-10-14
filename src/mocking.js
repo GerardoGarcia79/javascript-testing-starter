@@ -67,4 +67,4 @@ export function getDiscount() {
   return isChristmasDay ? 0.2 : 0;
 }
 
-// Added npx vitest run to .husky/pre-push test
+// Added npx vitest run
