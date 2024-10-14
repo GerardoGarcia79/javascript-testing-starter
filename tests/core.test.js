@@ -17,7 +17,6 @@ import {
   Stack,
   validateUserInput,
 } from '../src/core';
-import { it, expect, describe } from 'vitest';
 
 // Explanation
 
@@ -211,7 +210,7 @@ describe('fetchData', () => {
   it('should return a promise that will resolve to an array of numbers', async () => {
     // test reject
     try {
-      const result = await fetchData();
+      await fetchData();
     } catch (error) {
       expect(error).toHaveProperty('reason');
       expect(error.reason).toMatch(/fail/i);

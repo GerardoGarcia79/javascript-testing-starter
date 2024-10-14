@@ -36,9 +36,6 @@ describe('test suit', () => {
     // mockImplementation
 
     greet.mockImplementation((name) => 'Hello ' + name);
-
-    const result = greet('mosh');
-
     expect(greet).toHaveBeenCalledOnce('mosh');
   });
 });
