@@ -15,3 +15,16 @@ describe('test suit', () => {
     }
     );
     })
+
+    describe('test suite exercise', () => {
+        it('test suite exercise', () => {
+            const sendText = vi.fn();
+            sendText.mockReturnValue('ok');
+
+            const result = sendText('message');
+
+            expect(sendText).toHaveBeenCalledOnce();
+            expect(result).toBe('ok');
+            expect(sendText).toHaveBeenCalledWith('message');
+        })
+    })
